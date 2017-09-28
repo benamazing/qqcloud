@@ -28,7 +28,11 @@ POST_METHOD = 'POST'
 class SecurityGroupManager():
     def __init__(self, config_path=None):
         if config_path is None:
-            config_path = os.path.dirname(__file__) + '/conf.json'
+            dirname = os.path.dirname(__file__)
+            if dirname == '' or dirname is None:
+                config_path = 'conf.json'
+            else:
+                config_path = dirname + '/conf.json'
         self.config_path = config_path
         self.common_params = {}
         self.secret_key = ''
